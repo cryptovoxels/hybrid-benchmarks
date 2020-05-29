@@ -17,17 +17,16 @@ function main () {
   }
 
   let t = performance.now()
-  let sorted
 
   for (let i=0; i < iterations; ++i) {
     let camera = new Vector3(r(), r(), r())
 
-    sorted = sortBy(parcels, p => Vector3.DistanceSquared(camera, p))
-    
-    process.stdout.write(sorted[0].x.toFixed(2) + ", ")
+    parcels.sort((a, b) => Vector3.DistanceSquared(a, camera) - Vector3.DistanceSquared(b, camera))
+  
+    process.stdout.write(parcels[0].x.toFixed(2) + ", ")
   }
 
-  console.log(sorted[0].x);
+  console.log(parcels[0].x);
 
   let t2 = performance.now()
 
