@@ -60,7 +60,7 @@ int main () {
 
   std::vector<Vector3> parcels;
 
-  for (int i = 0; i < 3500; i++) {
+  for (int i = 0; i < 35000; i++) {
     Vector3 v(r(), r(), r());
     parcels.push_back(v);
   }
@@ -77,7 +77,7 @@ int main () {
       return Vector3::DistanceSquared(a, camera) < Vector3::DistanceSquared(b, camera); 
     });
 
-    std::cout << parcels[0].x << ", ";
+    // std::cout << parcels[0].x << ", ";
   }
 
   std::cout << parcels[0].x << "\n";

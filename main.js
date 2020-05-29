@@ -11,7 +11,7 @@ function main () {
 
   let parcels = []
 
-  for (let i = 0; i < 3500; i++) {
+  for (let i = 0; i < 35000; i++) {
     let v = new Vector3(r(), r(), r())
     parcels.push(v);
   }
@@ -23,7 +23,7 @@ function main () {
 
     parcels.sort((a, b) => Vector3.DistanceSquared(a, camera) - Vector3.DistanceSquared(b, camera))
   
-    process.stdout.write(parcels[0].x.toFixed(2) + ", ")
+    // process.stdout.write(parcels[0].x.toFixed(2) + ", ")
   }
 
   console.log(parcels[0].x);

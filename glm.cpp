@@ -1,3 +1,6 @@
+#define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
+#define GLM_FORCE_SIMD_AVX2
+
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <cmath>
@@ -38,7 +41,7 @@ int main () {
 
   std::vector<glm::vec3> parcels;
 
-  for (int i = 0; i < 3500; i++) {
+  for (int i = 0; i < 35000; i++) {
     glm::vec3 v(r(), r(), r());
     parcels.push_back(v);
   }
@@ -55,7 +58,7 @@ int main () {
       return distanceSquared(a, camera) < distanceSquared(b, camera); 
     });
 
-    std::cout << parcels[0].x << ", ";
+    // std::cout << parcels[0].x << ", ";
   }
 
   std::cout << parcels[0].x << "\n";
