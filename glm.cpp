@@ -1,6 +1,9 @@
+#define GLM_FORCE_INTRINSICS
 #define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #define GLM_FORCE_SIMD_AVX2
 
+#include <array>
+#include <type_traits>
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <cmath>
@@ -31,19 +34,23 @@ float r () {
   return (rand() % 80000 - 40000) / 100.0;
 }
 
-float distanceSquared (glm::vec3 const &a, glm::vec3 const &b) {
-  glm::vec3 temp = a - b;
+#define Vector3 glm::vec4
+
+float distanceSquared (Vector3 const &a, Vector3 const &b) {
+  Vector3 temp = a - b;
   return glm::dot(temp, temp);
 }
+
+#define PARCEL_COUNT 35000
 
 int main () {
   const int iterations = 1000;
 
-  std::vector<glm::vec3> parcels;
+  alignas(16) std::array<Vector3, PARCEL_COUNT> parcels;
 
   for (int i = 0; i < 35000; i++) {
-    glm::vec3 v(r(), r(), r());
-    parcels.push_back(v);
+    Vector3 v(r(), r(), r(), 0);
+    parcels[i] = v;
   }
 
   std::cout << std::fixed;
@@ -52,9 +59,9 @@ int main () {
   Timer myTimer("Sort glm c++", iterations);
 
   for(int i=0; i < iterations; ++i) {
-    glm::vec3 camera(r(), r(), r());
+    Vector3 camera(r(), r(), r(), 0);
 
-    std::sort(parcels.begin(), parcels.end(), [camera] (glm::vec3 const& a, glm::vec3 const& b) { 
+    std::sort(parcels.begin(), parcels.end(), [camera] (Vector3 const& a, Vector3 const& b) { 
       return distanceSquared(a, camera) < distanceSquared(b, camera); 
     });
 
