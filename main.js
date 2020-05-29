@@ -7,7 +7,7 @@ function r () {
 }
 
 function main () {
-  let iterations = 250;
+  let iterations = 1000;
 
   let parcels = []
 
