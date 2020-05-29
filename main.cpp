@@ -56,9 +56,7 @@ float r () {
 }
 
 int main () {
-  const int iterations = 1000;
-
-  Timer myTimer("Test 1", iterations);
+  const int iterations = 250;
 
   std::vector<Vector3> parcels;
 
@@ -70,12 +68,11 @@ int main () {
   std::cout << std::fixed;
   std::cout << std::setprecision(2);
 
-  int sum = 0;
+  Timer myTimer("Test 1", iterations);
+
   for(int i=0; i < iterations; ++i) {
     Vector3 camera(r(), r(), r());
-
-    std::sort(parcels.begin(), parcels.end(), [camera] (Vector3 const& a, Vector3 const& b) { return Vector3::Distance(a, camera) < Vector3::Distance(b, camera); });
-
+    std::sort(parcels.begin(), parcels.end(), [camera] (Vector3 const& a, Vector3 const& b) { return Vector3::DistanceSquared(a, camera) < Vector3::DistanceSquared(b, camera); });
     std::cout << parcels[0].x << ", ";
   }
 

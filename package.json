@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babylonjs": "^4.1.0"
+    "babylonjs": "^4.1.0",
+    "lodash.sortby": "^4.7.0"
   }
 }
